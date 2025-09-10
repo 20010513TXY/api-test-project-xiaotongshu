@@ -30,9 +30,9 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y openjdk-17-jre  # 安装Java（Allure需要）
         # 安装Allure
-        wget https://github.com/allure-framework/allure2/releases/download/2.25.0/allure-2.25.0.tgz
-        sudo tar -zxvf allure-2.25.0.tgz -C /opt/
-        sudo ln -s /opt/allure-2.25.0/bin/allure /usr/bin/allure
+        wget https://github.com/allure-framework/allure2/releases/download/2.35.1/allure-2.35.1.tgz
+        sudo tar -zxvf allure-2.35.1.tgz -C /opt/
+        sudo ln -s /opt/allure-2.35.1/bin/allure /usr/bin/allure
 
     - name: 运行测试用例
       run: |

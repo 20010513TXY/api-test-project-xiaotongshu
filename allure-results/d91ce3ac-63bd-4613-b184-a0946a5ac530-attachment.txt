@@ -1,0 +1,2 @@
+
+【登录类型非法（99不存在）】登录响应: {"success":false,"message":"出错啦，后台小哥正在努力修复中...","errorCode":"AUTH-10000","data":null}

@@ -1,0 +1,3 @@
+【获取到有效Token】: gZRxuOuEiLQOcG1VZadL...
+
+【无效Token（伪造值）】笔记响应: {"success":false,"message":"token 无效：fake_token_123456","errorCode":"401","data":null}

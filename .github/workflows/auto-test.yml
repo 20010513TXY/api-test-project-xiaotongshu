@@ -1,1 +1,51 @@
-是
+name: 接口自动化测试CI
+
+# 触发条件：当代码推送到main分支时自动运行
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+# 任务定义
+jobs:
+  test:
+    # 在Ubuntu系统上运行（GitHub提供的免费服务器）
+    runs-on: ubuntu-latest
+
+    # 步骤：安装环境 → 运行测试
+    steps:
+    - name: 拉取代码
+      uses: actions/checkout@v4  # 从GitHub拉取当前仓库代码
+
+    - name: 设置Python环境
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'  # 使用Python 3.11
+
+    - name: 安装依赖库
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt  # 安装requirements.txt中的依赖
+        sudo apt-get update
+        sudo apt-get install -y openjdk-17-jre  # 安装Java（Allure需要）
+        # 安装Allure
+        wget https://github.com/allure-framework/allure2/releases/download/2.25.0/allure-2.25.0.tgz
+        sudo tar -zxvf allure-2.25.0.tgz -C /opt/
+        sudo ln -s /opt/allure-2.25.0/bin/allure /usr/bin/allure
+
+    - name: 运行测试用例
+      run: |
+        # 执行测试并生成Allure报告数据
+        pytest test_api.py --alluredir=allure-results
+
+    - name: 生成Allure报告
+      if: always()  # 即使测试失败也生成报告
+      run: allure generate allure-results -o allure-report --clean
+
+    - name: 上传测试报告
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: allure-report  # 报告名称
+        path: allure-report/  # 报告路径

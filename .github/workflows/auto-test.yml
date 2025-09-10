@@ -38,7 +38,10 @@ jobs:
       run: |
         # 执行测试并生成Allure报告数据
         pytest test_send_code.py --alluredir=allure-results
-
+        
+    - name: 查看allure-results内容
+      run: ls -la allure-results
+  
     - name: 生成Allure报告
       if: always()  # 即使测试失败也生成报告
       run: allure generate allure-results -o allure-report --clean

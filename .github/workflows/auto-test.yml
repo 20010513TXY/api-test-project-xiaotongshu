@@ -37,7 +37,7 @@ jobs:
     - name: 运行测试用例
       run: |
         # 执行测试并生成Allure报告数据
-        pytest test_api.py --alluredir=allure-results
+        pytest test_send_code.py --alluredir=allure-results
 
     - name: 生成Allure报告
       if: always()  # 即使测试失败也生成报告
